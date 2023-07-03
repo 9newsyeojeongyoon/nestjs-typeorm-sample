@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserRepository } from './user.repository';
+import { UserRepository } from './repository/user.repository';
 import { FindOneOptions } from 'typeorm';
 import { UserDto } from './dto/user.dto';
 import * as bcrypt from 'bcrypt';
-import { User } from './entity/user.entity';
+import { User } from '../domain/entity/user.entity';
 
 @Injectable()
 export class UserService {
@@ -12,9 +12,7 @@ export class UserService {
     @InjectRepository(UserRepository) private userRepository: UserRepository,
   ) {}
 
-  async findByFields(
-    options: FindOneOptions<UserDto>,
-  ): Promise<User | undefined> {
+  async findByFields(options: FindOneOptions<User>): Promise<User | undefined> {
     return await this.userRepository.findOne(options);
   }
 
