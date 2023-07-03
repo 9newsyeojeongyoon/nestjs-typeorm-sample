@@ -67,4 +67,6 @@ export class AuthController {
     const jwt = req.cookies['jwt'];
     return res.send(jwt);
   }
+
+  // 이하 구글로그인 테스트
 }
